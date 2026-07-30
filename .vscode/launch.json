@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/${workspaceFolderBasename}.exe",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "build debug",
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/raylib/w64devkit/bin/gdb.exe",
+            "externalConsole": false
+        },
+        {
+            "name": "Clean and Run",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/${workspaceFolderBasename}.exe",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "clean debug",
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/raylib/w64devkit/bin/gdb.exe",
+            "externalConsole": false
+        }
+    ]
+}
