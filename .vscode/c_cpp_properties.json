@@ -4,7 +4,8 @@
             "name": "WSL",
             "intelliSenseMode": "linux-gcc-x64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:/raylib/raylib/src"
             ],
             "browse": {
                 "path": [
@@ -17,7 +18,8 @@
             "name": "Windows",
             "intelliSenseMode": "windows-gcc-x64",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:/raylib/raylib/src"
             ],
             "browse": {
                 "path": [

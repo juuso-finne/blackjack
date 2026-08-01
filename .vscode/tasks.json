@@ -4,7 +4,7 @@
         {
             "label": "build debug",
             "type": "process",
-            "command": "mingw32-make",
+            "command": "C:/raylib/w64devkit/bin/mingw32-make.exe",
             "args": [],
             "group": {
                 "kind": "build",
@@ -15,7 +15,7 @@
         {
             "label": "clean debug",
             "type": "process",
-            "command": "mingw32-make",
+            "command": "C:/raylib/w64devkit/bin/mingw32-make.exe",
             "args": [
                 "clean",
                 "all"
