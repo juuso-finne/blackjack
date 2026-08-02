@@ -1,6 +1,6 @@
 #include <raylib.h>
 #include "Card/card.h"
-#include "Hand/hand.h"
+#include "Game/game.h"
 
 int main()
 {
@@ -12,8 +12,8 @@ int main()
 
     Texture2D cardSpriteSheet = LoadTexture("assets/graphics/card_spritesheet.png");
 
-    Hand h = Hand({200,200});
-    h.SetActive(true);
+    Hand h = Hand();
+    //h.SetActive(true);
 
     Card c1 = Card(5, HEARTS);
     Card c2 = Card(12, CLUBS);
@@ -29,8 +29,8 @@ int main()
     while (!WindowShouldClose())
     {
         BeginDrawing();
-        ClearBackground(BLACK);
-        h.Draw(cardSpriteSheet);
+        ClearBackground(DARKGREEN);
+        h.Draw(cardSpriteSheet, {200,200});
         EndDrawing();
     }
 

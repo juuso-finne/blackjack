@@ -1,19 +1,13 @@
 #include <string>
 #include "hand.h"
 
-Hand::Hand(Vector2 aPosition)
+Hand::Hand()
 {
     cards = std::vector<Card>();
-    SetPosition(aPosition);
 
     minScore = 0;
     hasAce = false;
     isActive = false;
-}
-
-void Hand::SetPosition(Vector2 aPosition)
-{
-    position = aPosition;
 }
 
 void Hand::AddCard(Card c)
@@ -50,7 +44,7 @@ bool Hand::IsBusted()
     return minScore > 21;
 }
 
-void Hand::Draw(Texture2D &spritesheet)
+void Hand::Draw(Texture2D &spritesheet, Vector2 position)
 {
     float startingAngle = -rotationAngle * (cards.size() - 1)/2.0f;
 
@@ -58,7 +52,7 @@ void Hand::Draw(Texture2D &spritesheet)
     {
         cards[i].Draw(position, spritesheet, startingAngle + rotationAngle * i, isActive);
     }
-    PrintScore();
+    PrintScore(position);
 }
 
 void Hand::Discard(std::vector<Card> &discardPile)
@@ -70,7 +64,7 @@ void Hand::Discard(std::vector<Card> &discardPile)
     }
 }
 
-void Hand::PrintScore()
+void Hand::PrintScore(Vector2 position)
 {
     const int fontSize = 24;
     const float margin = Card::GetDimensions().x/2.0f;
@@ -96,7 +90,9 @@ void Hand::PrintScore()
     Vector2 offset = {-MeasureText(text, fontSize)/2.0f, margin};
     Vector2 textPosition = Vector2Add(position, offset);
 
-    DrawText(text, textPosition.x, textPosition.y, fontSize, WHITE);
+    Color col = isActive ? WHITE : DARKGRAY;
+
+    DrawText(text, textPosition.x, textPosition.y, fontSize, col);
 
 }
 

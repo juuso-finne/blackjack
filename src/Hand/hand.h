@@ -7,9 +7,8 @@ class Hand
 {
     public:
 
-        Hand(Vector2);
+        Hand();
 
-        void SetPosition(Vector2);
         void AddCard(Card);
         void Update();
 
@@ -19,12 +18,11 @@ class Hand
         bool IsBusted();
         int GetScore();
 
-        void Draw(Texture2D &spritesheet);
+        void Draw(Texture2D &, Vector2);
 
-        void Discard(std::vector<Card> &discardPile);
+        void Discard(std::vector<Card> &);
 
     private:
-        Vector2 position;
         const float rotationAngle = 12.5f;
 
         std::vector<Card> cards;
@@ -32,5 +30,5 @@ class Hand
         bool hasAce;
         bool isActive;
 
-        void PrintScore();
+        void PrintScore(Vector2);
 };
