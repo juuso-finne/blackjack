@@ -1,6 +1,5 @@
 #include "card.h"
 #include <stdexcept>
-#include <raymath.h>
 
 float Card::spriteWidth = 75.0f;
 float Card::spriteHeight = 112.0f;
