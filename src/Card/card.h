@@ -1,7 +1,7 @@
 #pragma once
 #include<raylib.h>
 
-enum class Suit
+enum Suit
 {
     CLUBS,
     DIAMONDS,
@@ -19,15 +19,9 @@ class Card
 
         void Draw(Vector2 position, const Texture2D &spritesheet, float rotation, bool active = true);
 
-        Suit GetSuit();
         int GetRank();
-        int GetSuitIndex();
 
         static Vector2 GetDimensions();
-        static Rectangle GetHitBox(Vector2 position);
-
-        bool CheckAccommodation(const Card &other);
-
         bool isFaceUp;
 
     protected:
