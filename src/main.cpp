@@ -15,8 +15,8 @@ int main()
     Hand h = Hand({200,200});
     h.SetActive(true);
 
-    Card c1 = Card(7, HEARTS);
-    Card c2 = Card(1, CLUBS, true);
+    Card c1 = Card(5, HEARTS);
+    Card c2 = Card(12, CLUBS);
     Card c3 = Card(13, DIAMONDS);
 
     h.AddCard(c1);
@@ -25,26 +25,11 @@ int main()
     h.Update();
     h.AddCard(c3);
     h.Update();
-    h.AddCard(c3);
-    h.Update();
-    h.AddCard(c3);
-    h.Update();
-    h.AddCard(c3);
-    h.Update();
-    h.AddCard(c3);
-    h.Update();
-    h.AddCard(c3);
-    h.Update();
-    h.AddCard(c3);
-    h.Update();
-    h.AddCard(c3);
-    h.Update();
 
     while (!WindowShouldClose())
     {
         BeginDrawing();
         ClearBackground(BLACK);
-        c2.Draw({200,200}, cardSpriteSheet, -90.0f);
         h.Draw(cardSpriteSheet);
         EndDrawing();
     }

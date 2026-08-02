@@ -32,4 +32,5 @@ class Hand
         bool hasAce;
         bool isActive;
 
+        void PrintScore();
 };

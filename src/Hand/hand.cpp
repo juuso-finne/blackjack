@@ -1,3 +1,4 @@
+#include <string>
 #include "hand.h"
 
 Hand::Hand(Vector2 aPosition)
@@ -22,6 +23,11 @@ void Hand::AddCard(Card c)
 
 void Hand::Update()
 {
+    if(cards.back().isFaceUp)
+    {
+        return;
+    }
+
     cards.back().TurnFaceUp();
     int rank = cards.back().GetRank();
     minScore += rank > 10 ? 10 : rank;
@@ -52,6 +58,7 @@ void Hand::Draw(Texture2D &spritesheet)
     {
         cards[i].Draw(position, spritesheet, startingAngle + rotationAngle * i, isActive);
     }
+    PrintScore();
 }
 
 void Hand::Discard(std::vector<Card> &discardPile)
@@ -61,6 +68,36 @@ void Hand::Discard(std::vector<Card> &discardPile)
         discardPile.push_back(cards.back());
         cards.pop_back();
     }
+}
+
+void Hand::PrintScore()
+{
+    const int fontSize = 24;
+    const float margin = Card::GetDimensions().x/2.0f;
+
+    std::string stringTemplate = "";
+
+    if (IsBusted())
+    {
+        stringTemplate = "Bust";
+    }
+    else if (IsBlackJack())
+    {
+        stringTemplate = "Blackjack!";
+    }
+    else
+    {
+        stringTemplate += std::to_string(minScore);
+        stringTemplate += minScore != GetScore() ? " / " + std::to_string(GetScore()) : "";
+    }
+
+    const char *text = stringTemplate.c_str();
+
+    Vector2 offset = {-MeasureText(text, fontSize)/2.0f, margin};
+    Vector2 textPosition = Vector2Add(position, offset);
+
+    DrawText(text, textPosition.x, textPosition.y, fontSize, WHITE);
+
 }
 
 int Hand::GetScore()
