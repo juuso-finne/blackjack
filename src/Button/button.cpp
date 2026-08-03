@@ -1,0 +1,43 @@
+#include "button.h"
+
+const int Button::fontSize = 24;
+
+const float Button::width = 200.0f;
+const float Button::height = 100.0f;
+
+Button::Button(const char * aLabel, Action aAction)
+{
+    label = aLabel;
+    action = aAction;
+
+    textPosition = {0,0};
+    boundaries = {0, 0, width, height};
+}
+
+void Button::SetPosition(Vector2 pos)
+{
+
+    int textWidth = MeasureText(label, fontSize);
+
+    textPosition.x = pos.x - textWidth/2.0f;
+    textPosition.y = pos.y;
+
+    boundaries.x = textPosition.x - (width - textWidth)/2.0f;
+    boundaries.y = textPosition.y - (height - fontSize)/2.0f;
+}
+
+bool Button::IsClicked()
+{
+    return CheckCollisionPointRec(GetMousePosition(), boundaries);
+}
+
+Action Button::GetAction()
+{
+    return action;
+}
+
+void Button::Draw()
+{
+    DrawText(label, textPosition.x, textPosition.y, fontSize, WHITE);
+    DrawRectangleRoundedLines(boundaries, .1, 1, WHITE);
+}
