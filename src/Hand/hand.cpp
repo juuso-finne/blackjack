@@ -46,7 +46,7 @@ bool Hand::IsBusted()
     return minScore > 21;
 }
 
-void Hand::Draw(Texture2D &spritesheet, Vector2 position)
+void Hand::Draw(Texture2D &spritesheet, Vector2 position, int fontSize)
 {
     float startingAngle = -rotationAngle * (cards.size() - 1)/2.0f;
 
@@ -54,7 +54,7 @@ void Hand::Draw(Texture2D &spritesheet, Vector2 position)
     {
         cards[i].Draw(position, spritesheet, startingAngle + rotationAngle * i, isActive);
     }
-    PrintScore(position);
+    PrintScore(position, fontSize);
 }
 
 void Hand::Discard(std::vector<Card> &discardPile)
@@ -66,9 +66,8 @@ void Hand::Discard(std::vector<Card> &discardPile)
     }
 }
 
-void Hand::PrintScore(Vector2 position)
+void Hand::PrintScore(Vector2 position, int fontSize)
 {
-    const int fontSize = 24;
     const float margin = Card::GetDimensions().x/2.0f;
 
     std::string stringTemplate = "";

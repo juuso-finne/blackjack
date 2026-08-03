@@ -18,7 +18,7 @@ class Hand
         bool IsBusted();
         int GetScore();
 
-        void Draw(Texture2D &, Vector2);
+        void Draw(Texture2D &, Vector2, int);
 
         void Discard(std::vector<Card> &);
 
@@ -30,5 +30,5 @@ class Hand
         bool hasAce;
         bool isActive;
 
-        void PrintScore(Vector2);
+        void PrintScore(Vector2, int);
 };

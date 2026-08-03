@@ -14,6 +14,8 @@ enum Action{
     INSURANCE_N
 };
 
+class Game;
+
 class Button
 {
     public:
@@ -37,5 +39,5 @@ class Button
         static const float width;
         static const float height;
 
-        static const int fontSize;
+        int fontSize;
 };

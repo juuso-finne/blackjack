@@ -6,6 +6,8 @@
 class Game
 {
     public:
+        static const int fontSize;
+
         Game();
 
         void Update();

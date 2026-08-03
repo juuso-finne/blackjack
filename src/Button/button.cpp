@@ -1,6 +1,5 @@
 #include "button.h"
-
-const int Button::fontSize = 24;
+#include "../Game/game.h"
 
 const float Button::width = 100.0f;
 const float Button::height = 50.0f;
@@ -9,6 +8,7 @@ Button::Button(const char * aLabel, Action aAction)
 {
     label = aLabel;
     action = aAction;
+    fontSize = Game::fontSize;
 
     textPosition = {0,0};
     boundaries = {0, 0, width, height};

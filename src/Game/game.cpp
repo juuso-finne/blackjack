@@ -1,5 +1,7 @@
 #include "game.h"
 
+const int Game::fontSize = 24;
+
 Game::Game()
 {
     drawHandler = DrawHandler(this);
