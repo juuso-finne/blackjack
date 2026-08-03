@@ -6,6 +6,9 @@ class Game;
 class DrawHandler
 {
     public:
+
+        static const float margin;
+
         DrawHandler(Game *aGame);
         DrawHandler();
         ~DrawHandler();

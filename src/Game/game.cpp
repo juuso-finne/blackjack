@@ -35,13 +35,11 @@ void Game::Draw()
 
 void Game::PlaceButtons()
 {
-    float y = (float)GetScreenHeight() - Button::GetDimensions().y;
     float segment = (float)GetScreenWidth()/((float)buttons.size() + 1.0f);
-    //float margin = 20.0f;
 
     for (size_t i = 0; i < buttons.size(); i++)
     {
         float x = segment * ((float)i + 1.0f);
-        buttons[i].SetPosition({x, y});
+        buttons[i].SetPosition(x);
     }
 }

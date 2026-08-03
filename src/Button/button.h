@@ -21,7 +21,7 @@ class Button
     public:
         Button(const char*, Action);
 
-        void SetPosition(Vector2);
+        void SetPosition(float);
         bool IsClicked();
 
         Action GetAction();
@@ -38,6 +38,4 @@ class Button
 
         static const float width;
         static const float height;
-
-        int fontSize;
 };

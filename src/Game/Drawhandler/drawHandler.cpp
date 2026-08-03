@@ -1,9 +1,10 @@
 #include "drawHandler.h"
 #include "../game.h"
 
+const float DrawHandler::margin = 20.0f;
+
 DrawHandler::DrawHandler()
 {
-
 }
 
 DrawHandler::DrawHandler(Game *aGame)
