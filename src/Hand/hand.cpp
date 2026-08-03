@@ -1,4 +1,3 @@
-#include <string>
 #include "hand.h"
 #include "../Game/game.h"
 
@@ -114,8 +113,6 @@ void Hand::Discard(std::vector<Card> &discardPile)
 
 void Hand::PrintScore(Vector2 position)
 {
-    const float margin = Card::GetDimensions().x/2.0f;
-
     std::string stringTemplate = "";
 
     if (IsBusted())
@@ -134,7 +131,7 @@ void Hand::PrintScore(Vector2 position)
 
     const char* text = stringTemplate.c_str();
 
-    Vector2 offset = {-MeasureText(text, Game::fontSize)/2.0f, margin};
+    Vector2 offset = {-MeasureText(text, Game::fontSize)/2.0f, DrawHandler::margin};
     Vector2 textPosition = Vector2Add(position, offset);
 
     Color col = isActive ? WHITE : DARKGRAY;
@@ -145,14 +142,9 @@ void Hand::PrintScore(Vector2 position)
 
 void Hand::PrintBet(Vector2 position)
 {
-    if(bet == 0)
-    {
-        return;
-    }
-
     const float lineSpace = 2.0f;
 
-    std::string stringTemplate = "Bet: " + std::to_string(bet);
+    std::string stringTemplate = bet == 0 ? "Dealer" : "Bet: " + std::to_string(bet);
 
     if (isResolved)
     {

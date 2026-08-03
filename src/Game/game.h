@@ -2,6 +2,7 @@
 #include "../Hand/hand.h"
 #include "../Button/button.h"
 #include "DrawHandler/drawHandler.h"
+#include <string>
 
 class Game
 {
@@ -17,6 +18,8 @@ class Game
         Hand dealerHand;
 
         std::vector<Button> buttons;
+
+        std::string message;
 
     private:
         DrawHandler drawHandler;

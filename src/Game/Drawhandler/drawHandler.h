@@ -14,10 +14,18 @@ class DrawHandler
         ~DrawHandler();
 
         void Draw();
+        void WriteCentralized(const char *text, float y, float left = 0.0f, float right = (float)GetScreenWidth());
 
     private:
         Game *game;
         Texture2D cardSpriteSheet;
 
+        float buttonLine;
+        float messageLine;
+        float playerHandLine;
+
         void DrawButtons();
+        void WriteMessage();
+        void DrawPlayerHands();
+        void DrawDealerHand();
 };

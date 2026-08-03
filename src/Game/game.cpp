@@ -2,18 +2,44 @@
 
 const int Game::fontSize = 24;
 
-Game::Game()
+Game::Game(): drawHandler(this)
 {
-    drawHandler = DrawHandler(this);
     dealerHand = Hand();
     playerHands = std::vector<Hand>();
     buttons = std::vector<Button>();
+    message = "This is a message";
+
     buttons.push_back(Button("Hit", HIT));
     buttons.push_back(Button("Stand", STAND));
-    buttons.push_back(Button("Deal", DEAL));
+    buttons.push_back(Button("Split", SPLIT));
     buttons.push_back(Button("Double", DOUBLE));
 
     PlaceButtons();
+
+    Card c1 = Card(9, SPADES);
+    Card c2 = Card(1, CLUBS);
+    Card c3 = Card(3, HEARTS);
+
+    Hand h1 = Hand(10);
+
+    h1.AddCard(c1);
+    h1.Update();
+    h1.AddCard(c2);
+    h1.Update();
+    h1.Resolve(15);
+    //h1.AddCard(c3);
+    //h1.Update();
+
+
+    dealerHand.AddCard(c1);
+    dealerHand.Update();
+    dealerHand.AddCard(c2);
+    dealerHand.Update();
+
+    playerHands.push_back(h1);
+    playerHands.push_back(h1);
+    playerHands.push_back(h1);
+    playerHands.push_back(h1);
 }
 
 void Game::Update()
