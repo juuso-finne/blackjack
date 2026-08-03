@@ -3,24 +3,37 @@
 #include<vector>
 #include "../Card/card.h"
 
+class Game;
+
 class Hand
 {
     public:
 
-        Hand();
+        Hand(int aBet = 0);
 
         void AddCard(Card);
         void Update();
 
         void SetActive(bool);
+        void Double();
+        Hand Split();
 
+        bool IsSplittable();
+        bool IsSplit();
         bool IsBlackJack();
         bool IsBusted();
+
+        int GetBet();
         int GetScore();
 
-        void Draw(Texture2D &, Vector2, int);
+        void Resolve(int);
+
+        void Draw(Texture2D &, Vector2);
 
         void Discard(std::vector<Card> &);
+
+    protected:
+        bool isSplit;
 
     private:
         static const float rotationAngle;
@@ -30,5 +43,17 @@ class Hand
         bool hasAce;
         bool isActive;
 
-        void PrintScore(Vector2, int);
+        int bet;
+        int winnings;
+
+        bool isDoubled;
+        bool isResolved;
+
+        void PrintScore(Vector2);
+        void PrintBet(Vector2);
+};
+
+class SplitHand: public Hand
+{   public:
+        SplitHand(int);
 };

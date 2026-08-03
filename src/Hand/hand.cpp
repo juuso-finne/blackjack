@@ -1,15 +1,27 @@
 #include <string>
 #include "hand.h"
+#include "../Game/game.h"
 
 const float Hand::rotationAngle = 12.5f;
 
-Hand::Hand()
+Hand::Hand(int aBet)
 {
+    bet = aBet;
     cards = std::vector<Card>();
 
     minScore = 0;
+    winnings = 0;
     hasAce = false;
-    isActive = false;
+    isActive = true;
+
+    isSplit = false;
+    isDoubled = false;
+    isResolved = false;
+}
+
+SplitHand::SplitHand(int aBet): Hand(aBet)
+{
+    isSplit = true;
 }
 
 void Hand::AddCard(Card c)
@@ -36,6 +48,40 @@ void Hand::SetActive(bool a)
     isActive = a;
 }
 
+void Hand::Double()
+{
+    bet *= 2;
+    isDoubled = true;
+}
+
+Hand Hand::Split()
+{
+    isSplit = true;
+    Hand output = SplitHand(bet);
+
+    output.AddCard(cards.back());
+    cards.pop_back();
+
+    return output;
+}
+
+bool Hand::IsSplittable()
+{
+    if(cards.size() != 2){
+        return false;
+    }
+
+    int firstRank = cards[0].GetRank();
+    int secondRank = cards[1].GetRank();
+
+    return (firstRank >= 10 && secondRank >= 10) || firstRank == secondRank;
+}
+
+bool Hand::IsSplit()
+{
+    return isSplit;
+}
+
 bool Hand::IsBlackJack()
 {
     return cards.size() == 2 && GetScore() == 21;
@@ -46,7 +92,7 @@ bool Hand::IsBusted()
     return minScore > 21;
 }
 
-void Hand::Draw(Texture2D &spritesheet, Vector2 position, int fontSize)
+void Hand::Draw(Texture2D &spritesheet, Vector2 position)
 {
     float startingAngle = -rotationAngle * (cards.size() - 1)/2.0f;
 
@@ -54,7 +100,7 @@ void Hand::Draw(Texture2D &spritesheet, Vector2 position, int fontSize)
     {
         cards[i].Draw(position, spritesheet, startingAngle + rotationAngle * i, isActive);
     }
-    PrintScore(position, fontSize);
+    PrintScore(position);
 }
 
 void Hand::Discard(std::vector<Card> &discardPile)
@@ -66,7 +112,7 @@ void Hand::Discard(std::vector<Card> &discardPile)
     }
 }
 
-void Hand::PrintScore(Vector2 position, int fontSize)
+void Hand::PrintScore(Vector2 position)
 {
     const float margin = Card::GetDimensions().x/2.0f;
 
@@ -88,13 +134,51 @@ void Hand::PrintScore(Vector2 position, int fontSize)
 
     const char* text = stringTemplate.c_str();
 
-    Vector2 offset = {-MeasureText(text, fontSize)/2.0f, margin};
+    Vector2 offset = {-MeasureText(text, Game::fontSize)/2.0f, margin};
     Vector2 textPosition = Vector2Add(position, offset);
 
     Color col = isActive ? WHITE : DARKGRAY;
 
-    DrawText(text, textPosition.x, textPosition.y, fontSize, col);
+    DrawText(text, textPosition.x, textPosition.y, Game::fontSize, col);
+    PrintBet({position.x, textPosition.y});
+}
 
+void Hand::PrintBet(Vector2 position)
+{
+    if(bet == 0)
+    {
+        return;
+    }
+
+    const float lineSpace = 2.0f;
+
+    std::string stringTemplate = "Bet: " + std::to_string(bet);
+
+    if (isResolved)
+    {
+        if (winnings == 0)
+        {
+            stringTemplate += ", loses";
+        }
+        else
+        {
+            stringTemplate += ", wins " + std::to_string(winnings);
+        }
+    }
+
+    const char* text = stringTemplate.c_str();
+    int textWidth = MeasureText(text, Game::fontSize);
+
+    Vector2 offset = {-textWidth/2.0f, Game::fontSize + lineSpace};
+    Vector2 textPosition = Vector2Add(position, offset);
+    Color col = isActive ? WHITE : DARKGRAY;
+
+    DrawText(text, textPosition.x, textPosition.y, Game::fontSize, col);
+}
+
+int Hand::GetBet()
+{
+    return bet;
 }
 
 int Hand::GetScore()
@@ -106,4 +190,10 @@ int Hand::GetScore()
     }
 
     return output;
+}
+
+void Hand::Resolve(int aWinnings)
+{
+    isResolved = true;
+    winnings = aWinnings;
 }
