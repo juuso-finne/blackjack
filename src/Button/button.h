@@ -11,7 +11,8 @@ enum Action{
     DOUBLE,
     SPLIT,
     INSURANCE_Y,
-    INSURANCE_N
+    INSURANCE_N,
+    CONTINUE
 };
 
 class Game;

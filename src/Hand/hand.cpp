@@ -26,6 +26,7 @@ SplitHand::SplitHand(int aBet): Hand(aBet)
 void Hand::AddCard(Card c)
 {
     cards.push_back(c);
+    Update();
 }
 
 void Hand::Update()
@@ -83,7 +84,7 @@ bool Hand::IsSplit()
 
 bool Hand::IsBlackJack()
 {
-    return cards.size() == 2 && GetScore() == 21;
+    return cards.size() == 2 && GetScore() == 21 && !isSplit;
 }
 
 bool Hand::IsBusted()
@@ -113,6 +114,11 @@ void Hand::Discard(std::vector<Card> &discardPile)
 
 void Hand::PrintScore(Vector2 position)
 {
+    if (minScore == 0)
+    {
+        return;
+    }
+
     std::string stringTemplate = "";
 
     if (IsBusted())

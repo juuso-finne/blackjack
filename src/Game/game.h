@@ -3,6 +3,15 @@
 #include "../Button/button.h"
 #include "DrawHandler/drawHandler.h"
 #include <string>
+#include "../Deck/deck.h"
+
+enum State{
+    INIT,
+    INSURANCE,
+    PLAYER_TURN,
+    DEALER_TURN,
+    END
+};
 
 class Game
 {
@@ -10,6 +19,7 @@ class Game
         static const int fontSize;
         static const int minBet;
         static const int maxBet;
+        static const int betIncrement;
 
         Game();
 
@@ -28,9 +38,18 @@ class Game
         int totalWins;
 
     private:
+        int activeHandIndex;
+
         DrawHandler drawHandler;
         Action action;
+        State state;
+        Deck deck;
+
+        std::vector<Card> discardPile;
 
         void PlaceButtons();
         void Reset();
+
+        void InitState();
+        void Deal();
 };

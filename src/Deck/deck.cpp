@@ -11,6 +11,9 @@ Deck::Deck(int aDecks)
     Reset();
 }
 
+Deck::Deck()
+{
+}
 
 void Deck::Shuffle()
 {
@@ -46,27 +49,16 @@ void Deck::Generate()
     }
 }
 
-Card Deck::DealOne()
+Card Deck::DealOne(std::vector<Card> &discardPile)
 {
     if (cards.empty()){
-        throw std::out_of_range("Attempting to deal a card from empty deck");
+        Append(discardPile);
+        discardPile.clear();
+        Shuffle();
     }
 
     Card output = cards.back();
     cards.pop_back();
-    return output;
-}
-
-std::vector<Card> Deck::DealN(int n)
-{
-    std::vector<Card> output{};
-    for (int i = 0; i < n; i++){
-        if (!cards.empty()){
-            output.push_back(DealOne());
-        } else{
-            break;
-        }
-    }
     return output;
 }
 

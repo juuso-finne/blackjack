@@ -6,12 +6,12 @@
 class Deck{
     public:
         Deck(int);
+        Deck();
         void Shuffle();
         bool IsEmpty();
         void Reset();
-        Card DealOne();
-        std::vector<Card> DealN(int n);
-        void Append(const std::vector<Card> &newCards);
+        Card DealOne(std::vector<Card> &);
+        void Append(const std::vector<Card> &);
 
     private:
         std::vector<Card> cards;
