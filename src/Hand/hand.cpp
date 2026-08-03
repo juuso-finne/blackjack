@@ -150,6 +150,10 @@ void Hand::PrintBet(Vector2 position)
     {
         if (winnings == 0)
         {
+            stringTemplate += ", push";
+        }
+        else if (winnings < 0)
+        {
             stringTemplate += ", loses";
         }
         else

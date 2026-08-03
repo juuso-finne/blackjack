@@ -15,6 +15,7 @@ class DrawHandler
 
         void Draw();
         void WriteCentralized(const char *text, float y, float left = 0.0f, float right = (float)GetScreenWidth());
+        void DrawHorizontalLine(float, Color);
 
     private:
         Game *game;
@@ -23,9 +24,14 @@ class DrawHandler
         float buttonLine;
         float messageLine;
         float playerHandLine;
+        float divider;
+        float rulesLine;
+        float insuranceLine;
 
         void DrawButtons();
         void WriteMessage();
         void DrawPlayerHands();
         void DrawDealerHand();
+        void WriteInsurance();
+        void WriteTotals();
 };

@@ -1,6 +1,8 @@
 #include "game.h"
 
 const int Game::fontSize = 24;
+const int Game::maxBet = 100;
+const int Game::minBet = 10;
 
 Game::Game(): drawHandler(this)
 {
@@ -8,6 +10,10 @@ Game::Game(): drawHandler(this)
     playerHands = std::vector<Hand>();
     buttons = std::vector<Button>();
     message = "This is a message";
+
+    insurance = 25;
+    totalLosses = 5000;
+    totalWins = 100;
 
     buttons.push_back(Button("Hit", HIT));
     buttons.push_back(Button("Stand", STAND));
@@ -26,9 +32,7 @@ Game::Game(): drawHandler(this)
     h1.Update();
     h1.AddCard(c2);
     h1.Update();
-    h1.Resolve(15);
-    //h1.AddCard(c3);
-    //h1.Update();
+    h1.Resolve(0);
 
 
     dealerHand.AddCard(c1);
@@ -68,4 +72,8 @@ void Game::PlaceButtons()
         float x = segment * ((float)i + 1.0f);
         buttons[i].SetPosition(x);
     }
+}
+
+void Game::Reset()
+{
 }

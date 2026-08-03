@@ -8,6 +8,8 @@ class Game
 {
     public:
         static const int fontSize;
+        static const int minBet;
+        static const int maxBet;
 
         Game();
 
@@ -20,10 +22,15 @@ class Game
         std::vector<Button> buttons;
 
         std::string message;
+        int insurance;
+        int currentBet;
+        int totalLosses;
+        int totalWins;
 
     private:
         DrawHandler drawHandler;
         Action action;
 
         void PlaceButtons();
+        void Reset();
 };
