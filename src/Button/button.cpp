@@ -2,8 +2,8 @@
 
 const int Button::fontSize = 24;
 
-const float Button::width = 200.0f;
-const float Button::height = 100.0f;
+const float Button::width = 100.0f;
+const float Button::height = 50.0f;
 
 Button::Button(const char * aLabel, Action aAction)
 {
@@ -34,6 +34,11 @@ bool Button::IsClicked()
 Action Button::GetAction()
 {
     return action;
+}
+
+Rectangle Button::GetBoundaries()
+{
+    return boundaries;
 }
 
 void Button::Draw()

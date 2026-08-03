@@ -23,7 +23,7 @@ class Button
         bool IsClicked();
 
         Action GetAction();
-        static Vector2 GetDimensions();
+        Rectangle GetBoundaries();
 
         void Draw();
 

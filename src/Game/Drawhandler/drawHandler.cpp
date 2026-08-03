@@ -1,4 +1,10 @@
 #include "drawHandler.h"
+#include "../game.h"
+
+DrawHandler::DrawHandler()
+{
+
+}
 
 DrawHandler::DrawHandler(Game *aGame)
 {
@@ -9,4 +15,17 @@ DrawHandler::DrawHandler(Game *aGame)
 DrawHandler::~DrawHandler()
 {
     UnloadTexture(cardSpriteSheet);
+}
+
+void DrawHandler::Draw()
+{
+    DrawButtons();
+}
+
+void DrawHandler::DrawButtons()
+{
+    for (Button b: game->buttons)
+    {
+        b.Draw();
+    }
 }
