@@ -36,13 +36,13 @@ Action Button::GetAction()
     return action;
 }
 
-Rectangle Button::GetBoundaries()
+Vector2 Button::GetDimensions()
 {
-    return boundaries;
+    return {width, height};
 }
 
 void Button::Draw()
 {
     DrawText(label, textPosition.x, textPosition.y, fontSize, WHITE);
-    DrawRectangleRoundedLines(boundaries, .1, 1, WHITE);
+    DrawRectangleRoundedLines(boundaries, .5, 1, WHITE);
 }

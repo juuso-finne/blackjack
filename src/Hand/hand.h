@@ -23,7 +23,7 @@ class Hand
         void Discard(std::vector<Card> &);
 
     private:
-        const float rotationAngle = 12.5f;
+        static const float rotationAngle;
 
         std::vector<Card> cards;
         int minScore;

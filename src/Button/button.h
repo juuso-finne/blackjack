@@ -7,7 +7,7 @@ enum Action{
     INC_BET,
     DEC_BET,
     HIT,
-    STAY,
+    STAND,
     DOUBLE,
     SPLIT,
     INSURANCE_Y,
@@ -23,7 +23,7 @@ class Button
         bool IsClicked();
 
         Action GetAction();
-        Rectangle GetBoundaries();
+        static Vector2 GetDimensions();
 
         void Draw();
 

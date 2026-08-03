@@ -1,6 +1,8 @@
 #include <string>
 #include "hand.h"
 
+const float Hand::rotationAngle = 12.5f;
+
 Hand::Hand()
 {
     cards = std::vector<Card>();
@@ -85,7 +87,7 @@ void Hand::PrintScore(Vector2 position)
         stringTemplate += minScore != GetScore() ? " / " + std::to_string(GetScore()) : "";
     }
 
-    const char *text = stringTemplate.c_str();
+    const char* text = stringTemplate.c_str();
 
     Vector2 offset = {-MeasureText(text, fontSize)/2.0f, margin};
     Vector2 textPosition = Vector2Add(position, offset);
