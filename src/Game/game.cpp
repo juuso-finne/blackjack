@@ -32,12 +32,23 @@ void Game::Update()
 
     switch (state)
     {
+
     case INIT:
         InitState();
         break;
+
+    case INSURANCE:
+        InsuranceState();
+        break;
+
     case PLAYER_TURN:
         PlayerTurnState();
         break;
+
+    case DEALER_TURN:
+        DealerTurnState();
+        break;
+
     default:
         throw std::logic_error("Unknown state");
     }

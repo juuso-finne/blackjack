@@ -56,4 +56,8 @@ class Game
 
         void PlayerTurnState();
         void Split();
+
+        void InsuranceState();
+
+        void DealerTurnState();
 };
