@@ -12,7 +12,7 @@ enum Action{
     SPLIT,
     INSURANCE_Y,
     INSURANCE_N,
-    CONTINUE
+    RESET
 };
 
 class Game;
