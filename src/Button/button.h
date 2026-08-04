@@ -22,13 +22,13 @@ class Button
     public:
         Button(const char*, Action);
 
-        void SetPosition(float);
-        bool IsClicked();
+        void SetPosition(const float);
+        const bool IsClicked();
 
-        Action GetAction();
-        static Vector2 GetDimensions();
+        const Action GetAction();
+        static const Vector2 GetDimensions();
 
-        void Draw();
+        const void Draw();
 
     private:
         const char* label;

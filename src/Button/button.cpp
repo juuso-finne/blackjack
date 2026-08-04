@@ -13,7 +13,7 @@ Button::Button(const char * aLabel, Action aAction)
     boundaries = {0, 0, width, height};
 }
 
-void Button::SetPosition(float xPos)
+void Button::SetPosition(const float xPos)
 {
     boundaries.y = GetScreenHeight() - DrawHandler::margin - height;
     textPosition.y = boundaries.y + height/2.0f - (float)Game::fontSize/2.0f;
@@ -25,22 +25,22 @@ void Button::SetPosition(float xPos)
     boundaries.x = textPosition.x - (width - textWidth)/2.0f;
 }
 
-bool Button::IsClicked()
+const bool Button::IsClicked()
 {
     return CheckCollisionPointRec(GetMousePosition(), boundaries);
 }
 
-Action Button::GetAction()
+const Action Button::GetAction()
 {
     return action;
 }
 
-Vector2 Button::GetDimensions()
+const Vector2 Button::GetDimensions()
 {
     return {width, height};
 }
 
-void Button::Draw()
+const void Button::Draw()
 {
     DrawText(label, textPosition.x, textPosition.y, Game::fontSize, WHITE);
     DrawRectangleRoundedLines(boundaries, .5, 1, WHITE);
