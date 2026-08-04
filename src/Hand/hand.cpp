@@ -16,6 +16,13 @@ Hand::Hand(int aBet)
     isSplit = false;
     isDoubled = false;
     isResolved = false;
+
+    coefficients = std::map<int, float>({
+        {WIN_REGULAR, 1.0f},
+        {WIN_BLACKJACK, 1.5f},
+        {PUSH, 0.0f},
+        {LOSS, -1.0f}
+    });
 }
 
 SplitHand::SplitHand(int aBet): Hand(aBet)
@@ -120,7 +127,7 @@ void Hand::PrintScore(Vector2 position)
 
     if (IsBusted())
     {
-        stringTemplate = "Bust";
+        stringTemplate = std::to_string(minScore) + ": Bust";
     }
     else if (IsBlackJack())
     {
@@ -180,6 +187,11 @@ int Hand::GetBet()
     return bet;
 }
 
+int Hand::GetMinScore()
+{
+    return minScore;
+}
+
 int Hand::GetScore()
 {
     int output = minScore;
@@ -191,8 +203,32 @@ int Hand::GetScore()
     return output;
 }
 
-void Hand::Resolve(int aWinnings)
+int Hand::Resolve(Hand dealerHand)
 {
+    Outcome outcome = PUSH;
     isResolved = true;
-    winnings = aWinnings;
+
+    if(IsBlackJack() && !dealerHand.IsBlackJack())
+    {
+        outcome = WIN_BLACKJACK;
+    }
+    else if(dealerHand.IsBlackJack() && IsBlackJack())
+    {
+        outcome = PUSH;
+    }
+    else if(dealerHand.IsBlackJack() || IsBusted() || (!dealerHand.IsBusted() && GetScore() < dealerHand.GetScore()))
+    {
+        outcome = LOSS;
+    }
+    else if (GetScore() > dealerHand.GetScore() || (dealerHand.IsBusted() && !IsBusted()))
+    {
+        outcome = WIN_REGULAR;
+    }
+    else
+    {
+        outcome = PUSH;
+    }
+
+    winnings = (int)(bet * coefficients[outcome]);
+    return winnings;
 }

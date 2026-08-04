@@ -13,7 +13,7 @@ void Game::PlayerTurnState()
         return;
     }
 
-    for (int i = 0; i < playerHands.size(); i++)
+    for (size_t i = 0; i < playerHands.size(); i++)
     {
         playerHands[i].SetActive(activeHandIndex == i);
     }

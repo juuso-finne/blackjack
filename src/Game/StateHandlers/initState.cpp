@@ -3,18 +3,6 @@
 
 void Game::InitState()
 {
-    message = "Current bet: " + std::to_string(currentBet);
-
-    if(currentBet == maxBet)
-    {
-        message += " (max. bet)";
-    }
-
-    if(currentBet == minBet)
-    {
-        message += " (min. bet)";
-    }
-
     Action previousAction = action;
     action = NONE;
 
@@ -24,9 +12,11 @@ void Game::InitState()
         return;
     case INC_BET:
         currentBet += currentBet < maxBet ? betIncrement : 0;
+        UpdateBet();
         return;
     case DEC_BET:
         currentBet -= currentBet > minBet ? betIncrement : 0;
+        UpdateBet();
         return;
     case DEAL:
         Deal();
@@ -64,4 +54,19 @@ void Game::Deal()
         state = PLAYER_TURN;
     }
     PlaceButtons();
+}
+
+void Game::UpdateBet()
+{
+    message = "Current bet: " + std::to_string(currentBet);
+
+    if(currentBet == maxBet)
+    {
+        message += " (max. bet)";
+    }
+
+    if(currentBet == minBet)
+    {
+        message += " (min. bet)";
+    }
 }

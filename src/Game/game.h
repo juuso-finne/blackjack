@@ -20,7 +20,7 @@ class Game
         static const int minBet;
         static const int maxBet;
         static const int betIncrement;
-        static const int maxHands;
+        static const size_t maxHands;
 
         Game();
 
@@ -39,7 +39,7 @@ class Game
         int totalWins;
 
     private:
-        int activeHandIndex;
+        size_t activeHandIndex;
 
         DrawHandler drawHandler;
         Action action;
@@ -53,6 +53,7 @@ class Game
 
         void InitState();
         void Deal();
+        void UpdateBet();
 
         void PlayerTurnState();
         void Split();
@@ -60,4 +61,7 @@ class Game
         void InsuranceState();
 
         void DealerTurnState();
+        void Evaluate();
+
+        void EndState();
 };

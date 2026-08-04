@@ -5,7 +5,7 @@ const int Game::fontSize = 24;
 const int Game::maxBet = 100;
 const int Game::minBet = 10;
 const int Game::betIncrement = 10;
-const int Game::maxHands = 4;
+const size_t Game::maxHands = 4;
 
 Game::Game(): drawHandler(this)
 {
@@ -49,6 +49,10 @@ void Game::Update()
         DealerTurnState();
         break;
 
+    case END:
+        EndState();
+        break;
+
     default:
         throw std::logic_error("Unknown state");
     }
@@ -86,6 +90,7 @@ void Game::Reset()
     buttons.push_back({"Bet +", INC_BET});
 
     PlaceButtons();
+    UpdateBet();
 
     for(Hand h: playerHands)
     {
