@@ -37,11 +37,13 @@ void Game::PlayerTurnState()
     if(splitButtonNeeded && !splitButtonPresent)
     {
         buttons.push_back({"Split",SPLIT});
+        PlaceButtons();
     }
 
     if(!splitButtonNeeded && splitButtonPresent)
     {
         buttons.pop_back();
+        PlaceButtons();
     }
 
     switch (previousAction)
