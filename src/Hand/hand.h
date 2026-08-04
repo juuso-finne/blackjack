@@ -1,9 +1,18 @@
 #pragma once
 
 #include<vector>
+#include <map>
 #include "../Card/card.h"
 
 class Game;
+
+enum Outcome
+{
+    WIN_REGULAR,
+    WIN_BLACKJACK,
+    LOSS,
+    PUSH
+};
 
 class Hand
 {
@@ -11,7 +20,7 @@ class Hand
 
         Hand(int aBet = 0);
 
-        void AddCard(Card);
+        void AddCard(Card, bool instantReveal = true);
         void Update();
 
         void SetActive(bool);
@@ -19,14 +28,16 @@ class Hand
         Hand Split();
 
         bool IsSplittable();
-        bool IsSplit();
+        bool IsSplitAce();
         bool IsBlackJack();
         bool IsBusted();
 
         int GetBet();
+        int GetMinScore();
         int GetScore();
+        int GetSize();
 
-        void Resolve(int);
+        int Resolve(Hand);
 
         void Draw(Texture2D &, Vector2);
 
@@ -49,8 +60,12 @@ class Hand
         bool isDoubled;
         bool isResolved;
 
+        void Reset();
+
         void PrintScore(Vector2);
         void PrintBet(Vector2);
+
+        std::map<int, float> coefficients;
 };
 
 class SplitHand: public Hand

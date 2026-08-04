@@ -1,49 +1,29 @@
 #include "game.h"
+#include <stdexcept>
 
 const int Game::fontSize = 24;
 const int Game::maxBet = 100;
 const int Game::minBet = 10;
+const int Game::betIncrement = 10;
+const size_t Game::maxHands = 4;
+const float Game::revealTime = 0.5f;
 
 Game::Game(): drawHandler(this)
 {
     dealerHand = Hand();
     playerHands = std::vector<Hand>();
     buttons = std::vector<Button>();
-    message = "This is a message";
+    discardPile = std::vector<Card>();
 
-    insurance = 25;
-    totalLosses = 5000;
-    totalWins = 100;
+    currentBet = minBet;
+    deck = Deck(5);
 
-    buttons.push_back(Button("Hit", HIT));
-    buttons.push_back(Button("Stand", STAND));
-    buttons.push_back(Button("Split", SPLIT));
-    buttons.push_back(Button("Double", DOUBLE));
+    totalLosses = 0;
+    totalWins = 0;
 
-    PlaceButtons();
+    revealTimer = Timer(revealTime);
 
-    Card c1 = Card(9, SPADES);
-    Card c2 = Card(1, CLUBS);
-    Card c3 = Card(3, HEARTS);
-
-    Hand h1 = Hand(10);
-
-    h1.AddCard(c1);
-    h1.Update();
-    h1.AddCard(c2);
-    h1.Update();
-    h1.Resolve(0);
-
-
-    dealerHand.AddCard(c1);
-    dealerHand.Update();
-    dealerHand.AddCard(c2);
-    dealerHand.Update();
-
-    playerHands.push_back(h1);
-    playerHands.push_back(h1);
-    playerHands.push_back(h1);
-    playerHands.push_back(h1);
+    Reset();
 }
 
 void Game::Update()
@@ -54,6 +34,36 @@ void Game::Update()
         {
             action = b.GetAction();
         }
+    }
+
+    switch (state)
+    {
+
+    case INIT:
+        InitState();
+        break;
+
+    case INSURANCE:
+        InsuranceState();
+        break;
+
+    case PLAYER_TURN:
+        PlayerTurnState();
+        break;
+
+    case DEALER_TURN:
+        DealerTurnState();
+        break;
+
+    case WAIT:
+        WaitState();
+
+    case END:
+        EndState();
+        break;
+
+    default:
+        throw std::logic_error("Unknown state");
     }
 
 }
@@ -76,4 +86,23 @@ void Game::PlaceButtons()
 
 void Game::Reset()
 {
+    action = NONE;
+    state = INIT;
+    insurance = 0;
+    activeHandIndex = 0;
+
+    buttons.clear();
+    buttons.push_back({"Bet -", DEC_BET});
+    buttons.push_back({"Deal", DEAL});
+    buttons.push_back({"Bet +", INC_BET});
+
+    PlaceButtons();
+    UpdateBet();
+
+    for(Hand h: playerHands)
+    {
+        h.Discard(discardPile);
+    }
+    playerHands.clear();
+    dealerHand.Discard(discardPile);
 }
