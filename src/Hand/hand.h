@@ -35,6 +35,7 @@ class Hand
         int GetBet();
         int GetMinScore();
         int GetScore();
+        int GetSize();
 
         int Resolve(Hand);
 

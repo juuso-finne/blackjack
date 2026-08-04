@@ -20,31 +20,29 @@ void Game::PlayerTurnState()
 
     Hand &activeHand = playerHands[activeHandIndex];
 
+
     if(activeHand.IsSplitAce() || activeHand.IsBusted() || activeHand.IsBlackJack())
     {
         activeHandIndex++;
         return;
     }
 
-    if(buttons.size() > 4)
-    {
-        throw std::logic_error("Too many buttons");
-    }
-
-    bool splitButtonPresent = buttons.size() == 4;
-    bool splitButtonNeeded = activeHand.IsSplittable() && playerHands.size() < Game::maxHands;
-
-    if(splitButtonNeeded && !splitButtonPresent)
-    {
-        buttons.push_back({"Split",SPLIT});
-        PlaceButtons();
-    }
-
-    if(!splitButtonNeeded && splitButtonPresent)
+    while (buttons.size() > 2)
     {
         buttons.pop_back();
-        PlaceButtons();
     }
+
+    if (activeHand.GetSize() == 2)
+    {
+        buttons.push_back({"Double", DOUBLE});
+    }
+
+    if(activeHand.IsSplittable() && playerHands.size() < Game::maxHands)
+    {
+        buttons.push_back({"Split",SPLIT});
+    }
+
+    PlaceButtons();
 
     switch (previousAction)
     {

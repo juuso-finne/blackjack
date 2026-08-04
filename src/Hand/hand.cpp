@@ -209,6 +209,11 @@ int Hand::GetScore()
     return output;
 }
 
+int Hand::GetSize()
+{
+    return cards.size();
+}
+
 int Hand::Resolve(Hand dealerHand)
 {
     Outcome outcome = PUSH;
