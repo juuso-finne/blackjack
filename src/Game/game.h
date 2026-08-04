@@ -55,10 +55,11 @@ class Game
         void Deal();
         void UpdateBet();
 
+        void InsuranceState();
+
         void PlayerTurnState();
         void Split();
-
-        void InsuranceState();
+        void EndPlayerTurn();
 
         void DealerTurnState();
         void Evaluate();

@@ -1,5 +1,6 @@
 #include "../game.h"
 #include <stdexcept>
+#include "../game.h"
 
 void Game::PlayerTurnState()
 {
@@ -8,8 +9,7 @@ void Game::PlayerTurnState()
 
     if(activeHandIndex > playerHands.size() - 1)
     {
-        state = DEALER_TURN;
-        buttons.clear();
+        EndPlayerTurn();
         return;
     }
 
@@ -82,4 +82,26 @@ void Game::Split()
     newHand.AddCard(deck.DealOne(discardPile));
 
     playerHands.insert(std::next(playerHands.begin(), activeHandIndex + 1), newHand);
+}
+void Game::EndPlayerTurn()
+{
+    bool skipDealerTurn = insurance == 0;
+    buttons.clear();
+
+    for (Hand h: playerHands)
+    {
+        skipDealerTurn = skipDealerTurn && ((h.IsBlackJack() && dealerHand.GetScore() < 10) || h.IsBusted());
+        if (!skipDealerTurn)
+        {
+            break;
+        }
+    }
+
+    if(skipDealerTurn)
+    {
+        Evaluate();
+        return;
+    }
+
+    state = DEALER_TURN;
 }
