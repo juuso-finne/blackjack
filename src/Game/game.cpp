@@ -17,6 +17,9 @@ Game::Game(): drawHandler(this)
     currentBet = minBet;
     deck = Deck(5);
 
+    totalLosses = 0;
+    totalWins = 0;
+
     Reset();
 }
 
@@ -80,8 +83,6 @@ void Game::Reset()
     action = NONE;
     state = INIT;
     insurance = 0;
-    totalLosses = 0;
-    totalWins = 0;
     activeHandIndex = 0;
 
     buttons.clear();
