@@ -50,7 +50,7 @@ void Game::Deal()
         message = "";
         buttons.push_back({"Hit", HIT});
         buttons.push_back({"Stand", STAND});
-        buttons.push_back({"Double", DOUBLE});
+
         state = PLAYER_TURN;
     }
     PlaceButtons();

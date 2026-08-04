@@ -4,7 +4,18 @@ void Game::DealerTurnState()
 {
     dealerHand.AddCard(deck.DealOne(discardPile));
 
-    if(dealerHand.IsBlackJack() || dealerHand.GetMinScore() >= 17)
+    bool uncontestedBlackJack = true;
+
+    for (Hand h: playerHands)
+    {
+        uncontestedBlackJack = uncontestedBlackJack && h.IsBlackJack() && !dealerHand.IsBlackJack();
+        if(!uncontestedBlackJack)
+        {
+            break;
+        }
+    }
+
+    if(dealerHand.IsBlackJack() || dealerHand.GetMinScore() >= 17 || uncontestedBlackJack)
     {
         Evaluate();
     }
