@@ -1,13 +1,13 @@
 #include "card.h"
 #include <stdexcept>
 
-float Card::spriteWidth = 75.0f;
-float Card::spriteHeight = 112.0f;
+float const Card::spriteWidth = 75.0f;
+float const Card::spriteHeight = 112.0f;
 
 const float scaling = 1.5f;
 
-float Card::width = spriteWidth * scaling;
-float Card::height = spriteHeight * scaling;
+float const Card::width = spriteWidth * scaling;
+float const Card::height = spriteHeight * scaling;
 
 Card::Card(int aRank, Suit aSuit, bool isVisible)
 {
@@ -33,7 +33,7 @@ void Card::TurnFaceDown()
     isFaceUp = false;
 }
 
-void Card::Draw(Vector2 position, const Texture2D &spritesheet, float rotation, bool active)
+const void Card::Draw(Vector2 position, const Texture2D &spritesheet, float rotation, bool active)
 {
     float xOffset = (isFaceUp ? (float)(rank - 1) : 13.0f) * spriteWidth;
     float yOffset = (isFaceUp ? (float)suitIndex : 3.0f) * spriteHeight;
@@ -47,12 +47,12 @@ void Card::Draw(Vector2 position, const Texture2D &spritesheet, float rotation, 
     DrawTexturePro(spritesheet, source, dest, {pivotX, height}, rotation, col);
 }
 
-int Card::GetRank()
+const int Card::GetRank()
 {
     return rank;
 }
 
-Vector2 Card::GetDimensions()
+const Vector2 Card::GetDimensions()
 {
     return {width, height};
 }

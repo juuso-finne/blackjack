@@ -18,11 +18,11 @@ class Card
         void TurnFaceUp();
         void TurnFaceDown();
 
-        void Draw(Vector2 position, const Texture2D &spritesheet, float rotation, bool active = true);
+        const void Draw(Vector2 position, const Texture2D &spritesheet, float rotation, bool active = true);
 
-        int GetRank();
+        const int GetRank();
 
-        static Vector2 GetDimensions();
+        static const Vector2 GetDimensions();
         bool isFaceUp;
 
     protected:
@@ -31,9 +31,9 @@ class Card
 
         Suit suit;
 
-        static float spriteWidth;
-        static float spriteHeight;
+        static const float spriteWidth;
+        static const float spriteHeight;
 
-        static float width;
-        static float height;
+        static const float width;
+        static const float height;
 };
