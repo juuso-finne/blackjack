@@ -101,5 +101,6 @@ void Game::EndPlayerTurn()
         return;
     }
 
-    state = DEALER_TURN;
+    dealerHand.AddCard(deck.DealOne(discardPile), false);
+    state = WAIT;
 }

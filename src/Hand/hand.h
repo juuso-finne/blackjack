@@ -20,7 +20,7 @@ class Hand
 
         Hand(int aBet = 0);
 
-        void AddCard(Card);
+        void AddCard(Card, bool instantReveal = true);
         void Update();
 
         void SetActive(bool);

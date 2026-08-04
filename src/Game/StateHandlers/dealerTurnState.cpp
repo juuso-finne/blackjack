@@ -2,8 +2,6 @@
 
 void Game::DealerTurnState()
 {
-    dealerHand.AddCard(deck.DealOne(discardPile));
-
     bool uncontestedBlackJack = true;
 
     for (Hand h: playerHands)
@@ -18,7 +16,11 @@ void Game::DealerTurnState()
     if(dealerHand.IsBlackJack() || dealerHand.GetMinScore() >= 17 || uncontestedBlackJack)
     {
         Evaluate();
+        return;
     }
+
+    dealerHand.AddCard(deck.DealOne(discardPile), false);
+    state = WAIT;
 }
 
 void Game::Evaluate()

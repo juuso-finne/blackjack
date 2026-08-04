@@ -4,12 +4,14 @@
 #include "DrawHandler/drawHandler.h"
 #include <string>
 #include "../Deck/deck.h"
+#include "../Timer/timer.h"
 
 enum State{
     INIT,
     INSURANCE,
     PLAYER_TURN,
     DEALER_TURN,
+    WAIT,
     END
 };
 
@@ -21,6 +23,7 @@ class Game
         static const int maxBet;
         static const int betIncrement;
         static const size_t maxHands;
+        static const float revealTime;
 
         Game();
 
@@ -45,6 +48,7 @@ class Game
         Action action;
         State state;
         Deck deck;
+        Timer revealTimer;
 
         std::vector<Card> discardPile;
 
@@ -63,6 +67,8 @@ class Game
 
         void DealerTurnState();
         void Evaluate();
+
+        void WaitState();
 
         void EndState();
 };

@@ -6,6 +6,7 @@ const int Game::maxBet = 100;
 const int Game::minBet = 10;
 const int Game::betIncrement = 10;
 const size_t Game::maxHands = 4;
+const float Game::revealTime = 0.5f;
 
 Game::Game(): drawHandler(this)
 {
@@ -19,6 +20,8 @@ Game::Game(): drawHandler(this)
 
     totalLosses = 0;
     totalWins = 0;
+
+    revealTimer = Timer(revealTime);
 
     Reset();
 }
@@ -51,6 +54,9 @@ void Game::Update()
     case DEALER_TURN:
         DealerTurnState();
         break;
+
+    case WAIT:
+        WaitState();
 
     case END:
         EndState();

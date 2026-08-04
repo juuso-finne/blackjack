@@ -23,10 +23,14 @@ SplitHand::SplitHand(int aBet): Hand(aBet)
     isSplit = true;
 }
 
-void Hand::AddCard(Card c)
+void Hand::AddCard(Card c, bool instantReveal)
 {
     cards.push_back(c);
-    Update();
+
+    if(instantReveal)
+    {
+        Update();
+    }
 }
 
 void Hand::Update()
