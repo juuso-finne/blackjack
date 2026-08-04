@@ -20,6 +20,8 @@ void Game::InitState()
 
     switch (previousAction)
     {
+    case NONE:
+        return;
     case INC_BET:
         currentBet += currentBet < maxBet ? betIncrement : 0;
         return;
