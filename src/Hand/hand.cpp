@@ -31,11 +31,6 @@ void Hand::AddCard(Card c)
 
 void Hand::Update()
 {
-    if(cards.back().isFaceUp)
-    {
-        return;
-    }
-
     cards.back().TurnFaceUp();
     int rank = cards.back().GetRank();
     minScore += rank > 10 ? 10 : rank;
@@ -61,6 +56,8 @@ Hand Hand::Split()
 
     output.AddCard(cards.back());
     cards.pop_back();
+
+    minScore /= 2;
 
     return output;
 }
