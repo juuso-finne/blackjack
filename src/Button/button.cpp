@@ -1,7 +1,7 @@
 #include "button.h"
 #include "../Game/game.h"
 
-const float Button::width = 100.0f;
+const float Button::width = 150.0f;
 const float Button::height = 50.0f;
 
 Button::Button(const char * aLabel, Action aAction)
