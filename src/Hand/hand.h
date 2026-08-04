@@ -59,6 +59,8 @@ class Hand
         bool isDoubled;
         bool isResolved;
 
+        void Reset();
+
         void PrintScore(Vector2);
         void PrintBet(Vector2);
 

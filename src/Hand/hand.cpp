@@ -8,14 +8,7 @@ Hand::Hand(int aBet)
     bet = aBet;
     cards = std::vector<Card>();
 
-    minScore = 0;
-    winnings = 0;
-    hasAce = false;
-    isActive = true;
-
-    isSplit = false;
-    isDoubled = false;
-    isResolved = false;
+    Reset();
 
     coefficients = std::map<int, float>({
         {WIN_REGULAR, 1.0f},
@@ -83,7 +76,7 @@ bool Hand::IsSplittable()
 
 bool Hand::IsSplitAce()
 {
-    return cards.size() == 1 && hasAce && isSplit;
+    return cards[0].GetRank() == 1 && isSplit;
 }
 
 bool Hand::IsBlackJack()
@@ -114,6 +107,19 @@ void Hand::Discard(std::vector<Card> &discardPile)
         discardPile.push_back(cards.back());
         cards.pop_back();
     }
+    Reset();
+}
+
+void Hand::Reset()
+{
+    minScore = 0;
+    winnings = 0;
+    hasAce = false;
+    isActive = true;
+
+    isSplit = false;
+    isDoubled = false;
+    isResolved = false;
 }
 
 void Hand::PrintScore(Vector2 position)
