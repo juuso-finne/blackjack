@@ -20,6 +20,7 @@ class Game
         static const int minBet;
         static const int maxBet;
         static const int betIncrement;
+        static const int maxHands;
 
         Game();
 
@@ -52,4 +53,7 @@ class Game
 
         void InitState();
         void Deal();
+
+        void PlayerTurnState();
+        void Split();
 };

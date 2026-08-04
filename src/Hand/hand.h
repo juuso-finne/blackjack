@@ -19,7 +19,7 @@ class Hand
         Hand Split();
 
         bool IsSplittable();
-        bool IsSplit();
+        bool IsSplitAce();
         bool IsBlackJack();
         bool IsBusted();
 

@@ -77,9 +77,9 @@ bool Hand::IsSplittable()
     return (firstRank >= 10 && secondRank >= 10) || firstRank == secondRank;
 }
 
-bool Hand::IsSplit()
+bool Hand::IsSplitAce()
 {
-    return isSplit;
+    return cards.size() == 1 && hasAce && isSplit;
 }
 
 bool Hand::IsBlackJack()

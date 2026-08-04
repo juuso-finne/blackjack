@@ -1,4 +1,5 @@
 #include "../game.h"
+#include <stdexcept>
 
 void Game::InitState()
 {
@@ -29,7 +30,7 @@ void Game::InitState()
         Deal();
         return;
     default:
-        return;
+       throw std::logic_error("Invalid action for state INIT");
     }
 }
 

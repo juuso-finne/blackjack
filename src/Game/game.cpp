@@ -1,9 +1,11 @@
 #include "game.h"
+#include <stdexcept>
 
 const int Game::fontSize = 24;
 const int Game::maxBet = 100;
 const int Game::minBet = 10;
 const int Game::betIncrement = 10;
+const int Game::maxHands = 4;
 
 Game::Game(): drawHandler(this)
 {
@@ -33,8 +35,11 @@ void Game::Update()
     case INIT:
         InitState();
         break;
-    default:
+    case PLAYER_TURN:
+        PlayerTurnState();
         break;
+    default:
+        throw std::logic_error("Unknown state");
     }
 
 }
