@@ -57,6 +57,7 @@ void Game::Update()
 
     case WAIT:
         WaitState();
+        break;
 
     case END:
         EndState();
