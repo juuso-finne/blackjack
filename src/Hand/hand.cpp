@@ -66,7 +66,7 @@ Hand Hand::Split()
     return output;
 }
 
-bool Hand::IsSplittable()
+const bool Hand::IsSplittable()
 {
     if(cards.size() != 2){
         return false;
@@ -78,22 +78,22 @@ bool Hand::IsSplittable()
     return (firstRank >= 10 && secondRank >= 10) || firstRank == secondRank;
 }
 
-bool Hand::IsSplitAce()
+const bool Hand::IsSplitAce()
 {
     return cards[0].GetRank() == 1 && isSplit;
 }
 
-bool Hand::IsBlackJack()
+const bool Hand::IsBlackJack()
 {
     return cards.size() == 2 && GetScore() == 21 && !isSplit;
 }
 
-bool Hand::IsBusted()
+const bool Hand::IsBusted()
 {
     return minScore > 21;
 }
 
-void Hand::Draw(Texture2D &spritesheet, Vector2 position)
+const void Hand::Draw(Texture2D &spritesheet, Vector2 position)
 {
     float startingAngle = -rotationAngle * (cards.size() - 1)/2.0f;
 
@@ -126,7 +126,7 @@ void Hand::Reset()
     isResolved = false;
 }
 
-void Hand::PrintScore(Vector2 position)
+const void Hand::PrintScore(Vector2 position)
 {
     if (minScore == 0)
     {
@@ -160,7 +160,7 @@ void Hand::PrintScore(Vector2 position)
     PrintBet({position.x, textPosition.y});
 }
 
-void Hand::PrintBet(Vector2 position)
+const void Hand::PrintBet(Vector2 position)
 {
     const float lineSpace = 2.0f;
 
@@ -192,17 +192,17 @@ void Hand::PrintBet(Vector2 position)
     DrawText(text, textPosition.x, textPosition.y, Game::fontSize, col);
 }
 
-int Hand::GetBet()
+const int Hand::GetBet()
 {
     return bet;
 }
 
-int Hand::GetMinScore()
+const int Hand::GetMinScore()
 {
     return minScore;
 }
 
-int Hand::GetScore()
+const int Hand::GetScore()
 {
     int output = minScore;
 
@@ -213,7 +213,7 @@ int Hand::GetScore()
     return output;
 }
 
-int Hand::GetSize()
+const int Hand::GetSize()
 {
     return cards.size();
 }

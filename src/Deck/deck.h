@@ -8,7 +8,7 @@ class Deck{
         Deck(int);
         Deck();
         void Shuffle();
-        bool IsEmpty();
+        const bool IsEmpty();
         void Reset();
         Card DealOne(std::vector<Card> &);
         void Append(const std::vector<Card> &);

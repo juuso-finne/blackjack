@@ -22,7 +22,7 @@ void Deck::Shuffle()
     std::shuffle(cards.begin(), cards.end(), g);
 }
 
-bool Deck::IsEmpty()
+const bool Deck::IsEmpty()
 {
     return cards.empty();
 }
