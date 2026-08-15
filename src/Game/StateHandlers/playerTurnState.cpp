@@ -86,13 +86,10 @@ void Game::EndPlayerTurn()
     bool skipDealerTurn = insurance == 0;
     buttons.clear();
 
-    for (Hand h: playerHands)
+    for (Hand &h: playerHands)
     {
         skipDealerTurn = skipDealerTurn && ((h.IsBlackJack() && dealerHand.GetScore() < 10) || h.IsBusted());
-        if (!skipDealerTurn)
-        {
-            break;
-        }
+        h.SetActive(true);
     }
 
     if(skipDealerTurn)
