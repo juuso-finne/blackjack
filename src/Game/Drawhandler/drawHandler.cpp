@@ -26,7 +26,7 @@ DrawHandler::~DrawHandler()
     UnloadTexture(cardSpriteSheet);
 }
 
-void DrawHandler::Draw()
+const void DrawHandler::Draw()
 {
     DrawButtons();
     WriteMessage();
@@ -45,12 +45,12 @@ void DrawHandler::WriteCentralized(const char *text, float y, float left, float 
     DrawText(text, (right - left)/2.0f - (float)textWidth/2.0f, y, Game::fontSize, WHITE);
 }
 
-void DrawHandler::DrawHorizontalLine(float y, Color col)
+const void DrawHandler::DrawHorizontalLine(float y, Color col)
 {
     DrawLine(0, y, GetScreenWidth(), y, col);
 }
 
-void DrawHandler::DrawButtons()
+const void DrawHandler::DrawButtons()
 {
     for (Button b: game->buttons)
     {
@@ -58,12 +58,12 @@ void DrawHandler::DrawButtons()
     }
 }
 
-void DrawHandler::WriteMessage()
+const void DrawHandler::WriteMessage()
 {
     WriteCentralized(game->message.c_str(), messageLine);
 }
 
-void DrawHandler::DrawPlayerHands()
+const void DrawHandler::DrawPlayerHands()
 {
     float segment = (float)GetScreenWidth()/((float)game->playerHands.size() + 1.0f);
 
@@ -74,12 +74,12 @@ void DrawHandler::DrawPlayerHands()
     }
 }
 
-void DrawHandler::DrawDealerHand()
+const void DrawHandler::DrawDealerHand()
 {
     game->dealerHand.Draw(cardSpriteSheet, {(float)GetScreenWidth()/2.0f, (float)Card::GetDimensions().y + margin});
 }
 
-void DrawHandler::WriteInsurance()
+const void DrawHandler::WriteInsurance()
 {
     if(game->insurance > 0)
     {
@@ -88,7 +88,7 @@ void DrawHandler::WriteInsurance()
     }
 }
 
-void DrawHandler::WriteTotals()
+const void DrawHandler::WriteTotals()
 {
 
     const char *totalWins = std::to_string(game->totalWins).c_str();

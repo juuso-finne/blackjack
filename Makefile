@@ -1,4 +1,5 @@
 RAYLIB_PATH = C:/raylib/raylib
+SHELL := C:/raylib/w64devkit/bin/sh.exe
 
 INCLUDES = -I$(RAYLIB_PATH)/src
 LDFLAGS  = -L$(RAYLIB_PATH)/src

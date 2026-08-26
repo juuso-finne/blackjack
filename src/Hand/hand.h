@@ -27,19 +27,19 @@ class Hand
         void Double();
         Hand Split();
 
-        bool IsSplittable();
-        bool IsSplitAce();
-        bool IsBlackJack();
-        bool IsBusted();
+        const bool IsSplittable();
+        const bool IsSplitAce();
+        const bool IsBlackJack();
+        const bool IsBusted();
 
-        int GetBet();
-        int GetMinScore();
-        int GetScore();
-        int GetSize();
+        const int GetBet();
+        const int GetMinScore();
+        const int GetScore();
+        const int GetSize();
 
         int Resolve(Hand);
 
-        void Draw(Texture2D &, Vector2);
+        const void Draw(Texture2D &, Vector2);
 
         void Discard(std::vector<Card> &);
 
@@ -62,8 +62,8 @@ class Hand
 
         void Reset();
 
-        void PrintScore(Vector2);
-        void PrintBet(Vector2);
+        const void PrintScore(Vector2);
+        const void PrintBet(Vector2);
 
         std::map<int, float> coefficients;
 };

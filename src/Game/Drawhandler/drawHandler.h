@@ -13,9 +13,7 @@ class DrawHandler
         DrawHandler();
         ~DrawHandler();
 
-        void Draw();
-        void WriteCentralized(const char *text, float y, float left = 0.0f, float right = (float)GetScreenWidth());
-        void DrawHorizontalLine(float, Color);
+        const void Draw();
 
     private:
         Game *game;
@@ -28,10 +26,13 @@ class DrawHandler
         float rulesLine;
         float insuranceLine;
 
-        void DrawButtons();
-        void WriteMessage();
-        void DrawPlayerHands();
-        void DrawDealerHand();
-        void WriteInsurance();
-        void WriteTotals();
+        const void DrawHorizontalLine(float, Color);
+        void WriteCentralized(const char *text, float y, float left = 0.0f, float right = (float)GetScreenWidth());
+
+        const void DrawButtons();
+        const void WriteMessage();
+        const void DrawPlayerHands();
+        const void DrawDealerHand();
+        const void WriteInsurance();
+        const void WriteTotals();
 };
